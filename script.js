@@ -65,24 +65,25 @@ btnRoll.addEventListener('click', function () {
 
 //按下HOLD
 btnHold.addEventListener('click', function () {
-  scores[activePlayer] += current;
-  console.log(scores[activePlayer]);
-  document.getElementById(`score--${activePlayer}`).textContent =
-    scores[activePlayer];
+  if (gameStatus) {
+    scores[activePlayer] += current;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      scores[activePlayer];
 
-  if (scores[activePlayer] >= 100) {
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.add('player--winner');
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.remove('player--active');
-    gameStatus = false;
-    dice.classList.add('hidden');
-  } else {
-    changePlayer();
+    if (scores[activePlayer] >= 100) {
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+      gameStatus = false;
+      dice.classList.add('hidden');
+      gameStatus(false);
+    } else {
+      changePlayer();
+    }
   }
-
   //   if (score0El.textContent >= 100) {
   //     player0El.classList.add('player--winner');
   //   } else if (score1El.textContent >= 100) {
